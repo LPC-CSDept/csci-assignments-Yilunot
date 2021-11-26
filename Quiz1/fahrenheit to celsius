@@ -34,3 +34,7 @@ main:
 	        l.s 	$f1, val1       #load values
 	        l.s 	$f2, val2
 	        l.s 	$f3, val3
+
+            sub.s 	$f0, $f0, $f1   # Fahrenheit-32.0
+	        mul.s 	$f0, $f0, $f2   #(Fahrenheit-32.0) ×5.0
+	        div.s 	$f0, $f0, $f3   #(Fahrenheit-32.0) ×5.0 ⁄ 9.0
