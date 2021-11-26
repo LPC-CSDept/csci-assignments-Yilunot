@@ -17,7 +17,13 @@ val2: 	    .float 5.0
 val3:	    .float 9.0
 
 
-	.text
-	.globl main
-    
+	        .text
+	        .globl main
+
 main:
+            li  $v0, 4
+	        la 	$a0, prompt     #ask user to enter value
+	        syscall
+
+	        li 	$v0, 5          #get the integer
+	        syscall
