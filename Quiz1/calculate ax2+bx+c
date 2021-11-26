@@ -1,0 +1,11 @@
+#
+#Quiz
+#
+#Tony Liu
+#11/25/21
+#calculate ax^2+bx+c
+
+
+    .data
+
+#default values
