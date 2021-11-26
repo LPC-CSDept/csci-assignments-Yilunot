@@ -38,3 +38,17 @@ main:
             sub.s 	$f0, $f0, $f1   # Fahrenheit-32.0
 	        mul.s 	$f0, $f0, $f2   #(Fahrenheit-32.0) ×5.0
 	        div.s 	$f0, $f0, $f3   #(Fahrenheit-32.0) ×5.0 ⁄ 9.0
+            
+            
+            li 	$v0, 4
+	        la 	$a0, Celsius        #print text
+	        syscall
+
+	        li 	$v0, 2              
+	        mov.s 	$f12, $f0       #print result
+	        syscall
+
+	        li 	$v0, 10             #end program
+	        syscall
+            
+            ##end of the file
