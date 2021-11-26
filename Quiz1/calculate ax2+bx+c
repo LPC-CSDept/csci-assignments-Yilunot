@@ -9,3 +9,13 @@
     .data
 
 #default values
+
+prompt1:	.asciiz	"Enter a value for x:"	# prompt
+prompt2:	.asciiz	"Enter a value for a:"	# prompt
+prompt3:	.asciiz	"Enter a value for b:"	# prompt
+prompt4:	.asciiz	"Enter a value for c:"	# prompt
+
+    .text
+	.globl	main
+    
+main:	
