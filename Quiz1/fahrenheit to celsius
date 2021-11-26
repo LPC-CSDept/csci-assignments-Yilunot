@@ -40,6 +40,15 @@ main:
 	        div.s 	$f0, $f0, $f3   #(Fahrenheit-32.0) ×5.0 ⁄ 9.0
             
             
+	        move	$t0, $v0	#temp store
+
+	        li	$v0, 1
+	        move	$a0, $t0       #display user input
+	        syscall
+
+
+
+
             li 	$v0, 4
 	        la 	$a0, Celsius        #print text
 	        syscall
