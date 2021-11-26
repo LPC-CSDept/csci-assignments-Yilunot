@@ -21,9 +21,16 @@ val3:	    .float 9.0
 	        .globl main
 
 main:
-            li  $v0, 4
-	        la 	$a0, prompt     #ask user to enter value
+            li      $v0, 4
+	        la 	    $a0, prompt     #ask user to enter value
 	        syscall
 
-	        li 	$v0, 5          #get the integer
+	        li 	    $v0, 5          #get the integer
 	        syscall
+
+            mtc1 	$v0, $f4        #move to core
+	        cvt.s.w $f0, $f4        #conver interger to decimal
+
+	        l.s 	$f1, val1       #load values
+	        l.s 	$f2, val2
+	        l.s 	$f3, val3
