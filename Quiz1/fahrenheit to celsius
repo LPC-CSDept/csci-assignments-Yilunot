@@ -5,3 +5,19 @@
 #11/25/21
 #Fahrenheit to Celsius
 
+
+    .data
+
+#default values
+
+prompt: 	.asciiz "Enter Value in Fahrenheit: "
+Celsius: 	.asciiz "Celsius: "
+val1: 	    .float 32.0
+val2: 	    .float 5.0
+val3:	    .float 9.0
+
+
+	.text
+	.globl main
+    
+main:
