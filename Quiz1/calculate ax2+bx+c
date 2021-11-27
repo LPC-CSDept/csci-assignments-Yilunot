@@ -26,17 +26,16 @@ main:
     li  $v0,5           #get x
     syscall
 
-    move $t1, $v0
+    move $t1, $v0       # t1=x
 
-
-li  $v0, 4
+    li  $v0, 4
     la  $a0, prompt2    #ask for a
     syscall
 
     li  $v0,5           #get a
     syscall
 
-    move $t2, $v0
+    move $t2, $v0       #t2= a
 
     li  $v0, 4
     la  $a0, prompt3    #ask for b
@@ -45,7 +44,7 @@ li  $v0, 4
     li  $v0,5           #get b
     syscall
 
-    move $t3, $v0
+    move $t3, $v0       #t3= b
 
 
     li  $v0, 4
@@ -55,4 +54,14 @@ li  $v0, 4
     li  $v0,5           #get c
     syscall
 
-    move $t4, $v0
+    move $t4, $v0       #t4=c
+
+    mult $t0, $t1, $t2  # x*a
+    mflo $t0            # t0 = ax
+    addiu $t0, $t0, $t3 # t0= ax+b
+    nop
+    mult $t0, $t0, $t1  # t0= (ax+b)x
+    mflo $t0            # t0= ax^2+ bx
+    addiu $t0, t0, t4   # t0= ax^2+ bx +c
+
+
