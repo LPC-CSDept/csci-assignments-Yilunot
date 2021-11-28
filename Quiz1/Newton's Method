@@ -43,7 +43,9 @@ loop:
 #compare
 	c.lt.s  	$f6, $f4		# |n/(x^2) - 1.0| < 0.00001
     bc1t        done
-
+    nop
+    j loop                  #next aproximantion value
+    nop
 
 
 done:
