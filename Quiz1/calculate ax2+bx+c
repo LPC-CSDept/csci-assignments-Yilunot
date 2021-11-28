@@ -73,7 +73,7 @@ main:
 
     mult $t1, $t2  # x*a
     mflo $t0            # t0 = ax
-    addiu $t0, $t0, $t3 # t0= ax+b
+    addu $t0, $t0, $t3 # t0= ax+b
     nop
     mult $t0, $t1  	    # t0= (ax+b)x
     mflo $t0            # t0= ax^2+ bx
