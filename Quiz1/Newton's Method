@@ -7,5 +7,5 @@
 
 
     .data
-
-#default values
+n:	.float  3        #temp value
+prompt:	.asciiz "Enter an integer for n: "      #display intruction
