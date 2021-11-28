@@ -14,6 +14,7 @@ prompt1:	.asciiz	"Enter a value for x:"	# prompt
 prompt2:	.asciiz	"Enter a value for a:"	# prompt
 prompt3:	.asciiz	"Enter a value for b:"	# prompt
 prompt4:	.asciiz	"Enter a value for c:"	# prompt
+result: 	.asciiz	"\nResult: "
 
     .text
 	.globl	main
@@ -60,8 +61,20 @@ main:
     mflo $t0            # t0 = ax
     addiu $t0, $t0, $t3 # t0= ax+b
     nop
-    mult $t0, $t0, $t1  # t0= (ax+b)x
-    mflo $t0            # t0= ax^2+ bx
-    addiu $t0, t0, t4   # t0= ax^2+ bx +c
+    mult $t0, $t1  	# t0= (ax+b)x
+    mflo $t0            	# t0= ax^2+ bx
+    addu $t0, $t0, $t4   # 
+
+  
+    li 	$v0, 4
+    la 	$a0, result #print text
+    syscall
+
+    li 	$v0, 1              
+    move $a0, $t0       #print result
+    syscall
+
+    li  $v0, 10             #end program
+    syscall
 
 
