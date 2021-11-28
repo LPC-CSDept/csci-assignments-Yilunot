@@ -11,9 +11,9 @@
 #default values
 
 prompt1:	.asciiz	"Enter a value for x:"	# prompt
-prompt2:	.asciiz	"Enter a value for a:"	# prompt
-prompt3:	.asciiz	"Enter a value for b:"	# prompt
-prompt4:	.asciiz	"Enter a value for c:"	# prompt
+prompt2:	.asciiz	"\nEnter a value for a:"	# prompt
+prompt3:	.asciiz	"\nEnter a value for b:"	# prompt
+prompt4:	.asciiz	"\nEnter a value for c:"	# prompt
 result: 	.asciiz	"\nResult: "
 
     .text
@@ -29,6 +29,10 @@ main:
 
     move $t1, $v0       # t1=x
 
+    li	$v0, 1
+	move	$a0, $t1      #display user input
+	syscall
+
     li  $v0, 4
     la  $a0, prompt2    #ask for a
     syscall
@@ -37,6 +41,9 @@ main:
     syscall
 
     move $t2, $v0       #t2= a
+    li	$v0, 1
+	move	$a0, $t2       #display user input
+	syscall
 
     li  $v0, 4
     la  $a0, prompt3    #ask for b
@@ -47,6 +54,9 @@ main:
 
     move $t3, $v0       #t3= b
 
+    li	$v0, 1
+	move	$a0, $t3       #display user input
+	syscall
 
     li  $v0, 4
     la  $a0, prompt4    #ask for c
@@ -57,17 +67,21 @@ main:
 
     move $t4, $v0       #t4=c
 
+    li	$v0, 1
+	move	$a0, $t4       #display user input
+	syscall
+
     mult $t0, $t1, $t2  # x*a
     mflo $t0            # t0 = ax
     addiu $t0, $t0, $t3 # t0= ax+b
     nop
-    mult $t0, $t1  	# t0= (ax+b)x
-    mflo $t0            	# t0= ax^2+ bx
+    mult $t0, $t1  	    # t0= (ax+b)x
+    mflo $t0            # t0= ax^2+ bx
     addu $t0, $t0, $t4   # 
 
   
     li 	$v0, 4
-    la 	$a0, result #print text
+    la 	$a0, result     #print text
     syscall
 
     li 	$v0, 1              
@@ -76,5 +90,3 @@ main:
 
     li  $v0, 10             #end program
     syscall
-
-
