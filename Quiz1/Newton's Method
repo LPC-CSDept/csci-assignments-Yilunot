@@ -9,6 +9,7 @@
     .data
 n:	.float  3        #temp value
 prompt:	.asciiz "Enter an integer for n: "      #display intruction
+result: .asciiz "\nThe square root is: "
 
     .text
     .globl main
@@ -18,7 +19,13 @@ main:
 	la	$a0, prompt	    # print string
 	syscall			
 	li	$v0, 5		
-	syscall			    # get the integer
+	syscall		    # get the integer
+    
+    move $t7, $v0       # t7=n
+    li	$v0, 1
+	move	$a0, $t1      #display user input
+	syscall
+
     mtc1	$v0, $f1	# move integer to coprocessor 1
 	cvt.s.w	$f1, $f1	# convert integer to float
     s.s	    $f1, n		# store it in n
@@ -49,6 +56,10 @@ loop:
 
 
 done:
+    li 	$v0, 4
+    la 	$a0, result     #print text
+    syscall
+    
     mov.s	$f12, $f6	# print the result
 	li	$v0, 2
 	syscall
