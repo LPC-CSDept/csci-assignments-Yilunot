@@ -35,5 +35,8 @@ loop:
     div.s $f5,$f5,$f3   #x' = n/x
     add.s $f5,$f3,$f5  #x' = x+(n/x)
     div.s $f5,$f5,$2    #x' = (x+n/x)/2
-
-    
+#aproximantion to the square root
+    mul.s	$f6, $f3, $f3	# check: x^2
+    div.s   $f6, $f0, $f6   # n/x^2
+    sub.s   $f6, $f6, $f1   # n/x^2 - 1.0
+    abs.s	$f6, $f6		# |n/x^2 - 1.0|
