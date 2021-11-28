@@ -40,3 +40,19 @@ loop:
     div.s   $f6, $f0, $f6   # n/x^2
     sub.s   $f6, $f6, $f1   # n/x^2 - 1.0
     abs.s	$f6, $f6		# |n/x^2 - 1.0|
+#compare
+	c.lt.s  	$f6, $f4		# |n/(x^2) - 1.0| < 0.00001
+    bc1t        done
+
+
+
+done:
+    mov.s	$f12, $f6	# print the result
+	li	$v0, 2
+	syscall
+	li	$v0, 10		# end program
+	syscall
+
+
+
+
