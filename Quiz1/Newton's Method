@@ -23,3 +23,9 @@ main:
 	cvt.s.w	$f1, $f1	# convert integer to float
     s.s	    $f1, n		# store it in n
 	nop	
+
+    l.s	    $f0, n		# get n
+	li.s	$f1, 1.0	# constant 1.0
+	li.s	$f2, 2.0	# constant 2.0
+	li.s	$f3, 1.0	# x == first approx.
+	li.s	$f4, 1.0e-5	#accuracy limit
