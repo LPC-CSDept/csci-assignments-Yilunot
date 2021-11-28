@@ -71,7 +71,7 @@ main:
 	move	$a0, $t4       #display user input
 	syscall
 
-    mult $t0, $t1, $t2  # x*a
+    mult $t1, $t2  # x*a
     mflo $t0            # t0 = ax
     addiu $t0, $t0, $t3 # t0= ax+b
     nop
