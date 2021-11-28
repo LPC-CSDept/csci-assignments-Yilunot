@@ -7,7 +7,7 @@
 
 
     .data
-n:	.float  3        #temp value
+n:	.float  3.0        #temp value
 prompt:	.asciiz "Enter an integer for n: "      #display intruction
 result: .asciiz "\nThe square root is: "
 
