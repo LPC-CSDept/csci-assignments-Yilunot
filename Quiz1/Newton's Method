@@ -29,3 +29,11 @@ main:
 	li.s	$f2, 2.0	# constant 2.0
 	li.s	$f3, 1.0	# x == first approx.
 	li.s	$f4, 1.0e-5	#accuracy limit
+
+loop: 
+    mov.s $f5,$f0       #x' = n
+    div.s $f5,$f5,$f3   #x' = n/x
+    add.s $f5,$f3,$f5  #x' = x+(n/x)
+    div.s $f5,$f5,$2    #x' = (x+n/x)/2
+
+    
