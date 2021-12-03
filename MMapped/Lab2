@@ -32,9 +32,9 @@ rd_wait:
 		b 		rd_wait
 
 else:
-        add     $a0, $s1, $s2       
-        li      $v0, 1
+        add     $a0, $s1, $s2           
+        li      $v0, 1                  #print
         syscall
-        li      $v0,10
+        li      $v0,10              #end program
         syscall
-        
+
