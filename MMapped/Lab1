@@ -8,7 +8,9 @@
 
     .data
     .text
-    .globl.main
+    .globl main
+
+main:
 
             lui   $t0, 0xffff 
 rd_wait:    lw    $t1,  0($t0)      # load from the input control register 
