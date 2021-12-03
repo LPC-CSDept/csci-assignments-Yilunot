@@ -26,7 +26,15 @@ rd_wait:
 
         sub 	$s0, $s0, 48	        # s0 = v0 - 48
 		sub		$t2, $t2, 1             
-		beq 	$t2, $zero, readall 
+		beq 	$t2, $zero, else
 
 		mul 	$s1, $s0, 10	        # It is the first digit among two digits
 		b 		rd_wait
+
+else:
+        add     $a0, $s1, $s2       
+        li      $v0, 1
+        syscall
+        li      $v0,10
+        syscall
+        
