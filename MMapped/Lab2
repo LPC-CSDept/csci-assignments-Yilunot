@@ -15,9 +15,18 @@ num:	.word	2
 
 main:
 
+        lw      $t2, num    # load 2 digits
+        lui     $t0, 0xffff # load upper immediate
 
 rd_wait:
-		lw		$t1, 0($t0)
-		andi 	$t1, $t1, 0x0001 	
-		beq		$t1, $zero, rd_wait     
-		lw		$s0, 4($t0)		
+		lw		$t1, 0($t0)    
+		andi 	$t1, $t1, 0x0001 	     #test reciever control
+		beq		$t1, $zero, rd_wait         #branch if equal to 0
+		lw		$s0, 4($t0)		        # if 1 read Characters
+
+        sub 	$s0, $s0, 48	        # s0 = v0 - 48
+		sub		$t2, $t2, 1             
+		beq 	$t2, $zero, readall 
+
+		mul 	$s1, $s0, 10	        # It is the first digit among two digits
+		b 		rd_wait
