@@ -1,0 +1,19 @@
+#
+#Lab1
+#
+#Tony Liu
+#12/2/2021
+#Implementation of memory mapped I/O
+
+
+    .data
+    .text
+    .globl.main
+
+            lui   $t0, 0xffff 
+rd_wait:    lw    $t1,  0($t0)      # load from the input control register 
+            andi  $t1, $t1, 0x0001  # reset (clear) all bits except LSB 
+            beq   $t1, $zero,  rd_wait # if not yet ready, then loop back 
+            lw    $v0,  4( $t0)     # input device is ready, so read 
+
+
