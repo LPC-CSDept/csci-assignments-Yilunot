@@ -8,9 +8,16 @@
 #Print the decimal value through the syscall
 
 
-    .data
+        .data
 num:	.word	2
-    .text
-    .globl main
+        .text
+        .globl main
 
 main:
+
+
+rd_wait:
+		lw		$t1, 0($t0)
+		andi 	$t1, $t1, 0x0001 	
+		beq		$t1, $zero, rd_wait     
+		lw		$s0, 4($t0)		
