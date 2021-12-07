@@ -1,5 +1,5 @@
 #
-#Lab2
+#Lab3
 #
 #Tony Liu
 #12/7/2021
@@ -13,6 +13,27 @@ main:
         lui		$t0, 0xffff	
 wr_wait:
         lw		$t1, 8($t0)
-		andi		$t1, $t1, 0x0001
+		andi	$t1, $t1, 0x0001
 		beq		$t1, $zero, wr_wait
+        sw     	$v0,  12( $t0 ) 
+	
+	    div	$v1, $t3, 10
+	    add 	$v0, $v1,48
+	    move	$a0,$v0
+	    li 	$v0, 1
+	    syscall 	
 
+	    sub 	$t3, $t3, 1
+	    beq 	$t3,$zero, else
+	    b 		wr_wait
+else:
+	
+	mul	$v1,$v1, $t4
+	
+	add 	$v0, $v1, 48
+	move	$a0,$v0	
+	 li 	$v0, 1
+	syscall 
+
+	 li 	$v0, 10
+	 syscall
