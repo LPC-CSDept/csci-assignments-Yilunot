@@ -1,0 +1,25 @@
+#
+#Lab2
+#
+#Tony Liu
+#12/2/2021
+#Read two digits with memory-mapped I/O
+
+
+
+    lui	$t0, 0xffff	
+
+waitloop: 
+	lw $t1, 0($t0)
+	andi $t1, $t1, 0x0001
+	beq $t1, $zero, waitloop
+
+
+	lw $a0, 4($t0)
+	beq $a0, $s0, done	# $s0 has the ascii code for ‘q’
+	li $v0,1
+	syscall
+
+	j waitloop
+
+done: 
