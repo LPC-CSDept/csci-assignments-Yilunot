@@ -17,7 +17,7 @@ wr_wait:
 		beq		$t1, $zero, wr_wait
         sw     	$v0,  12( $t0 ) 
 	
-	    div	$v1, $t3, 10
+	    div	    $v1, $t3, 10            
 	    add 	$v0, $v1,48
 	    move	$a0,$v0
 	    li 	$v0, 1
