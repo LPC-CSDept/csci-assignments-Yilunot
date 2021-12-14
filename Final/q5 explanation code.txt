@@ -58,3 +58,14 @@ $s1 will contain 0 and will save the decimal value and add to the next position.
     add	$s1, $s1, $s0	# s1 = s1 + s0  
 if the t9 user input isnt processed or null will go back to the loop to the next digit. 
     bnez $t9, waitloop         	# brach on no equal to zero 
+
+
+move value saved in $s1 to be printed to $a0 
+
+    move	$a0, $s1	        # copy from register to register for print
+    li      $v0, 1              # system call code for print integers.
+    syscall 
+
+the code for the program to end
+    li      $v0,10              # code 10 == exit
+    syscall                     # Return to OS.
