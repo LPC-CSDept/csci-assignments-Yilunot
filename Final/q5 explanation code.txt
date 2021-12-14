@@ -1,0 +1,10 @@
+# Tony Liu 
+#code explanation
+
+
+#data section
+
+
+".data" Section where data is stored in memory.
+we use "digits:" what can be cosidered as a label or symbolic names for my data. 
+".word 100"  Integers are referred to as words (32-bit value) we can get 3 digits.
