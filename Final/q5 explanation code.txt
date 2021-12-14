@@ -8,3 +8,12 @@
 ".data" Section where data is stored in memory.
 we use "digits:" what can be cosidered as a label or symbolic names for my data. 
 ".word 100"  Integers are referred to as words (32-bit value) we can get 3 digits.
+
+.data
+digits:	.word   100     # (one, ten, hundred) taking the 3 digits
+
+Section that contains instructions and program logic
+
+    .text
+Declares an instruction label as global, making it accessible to other files
+    .globl main
