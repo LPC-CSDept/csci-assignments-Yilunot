@@ -45,3 +45,16 @@ loop back to test for key input if it is 0
     beq  $t1, $zero, waitloop   #if the bit is not ready yet go back to the waitloop
 the character will be save in s0 
     lw   $s0, 4($t0)            #input device is ready so read a character from I/O
+
+the calculation to convert the ascii value into decimal value
+what ever digit the user enters, example if user press they key 4 is = 52-48 (0 in ascii key) = 4 
+converts s0 ascii value to dec value
+    sub	$s0, $s0, 48	# s0 = v0-48
+This has one mul less per iteration, and there's no need of knowing the length of the digit before entering the loop.
+    mul 	$s0, $s0, $t9          # s0 = s0 * v0
+dividing by ten to go to the next iteration of the user input
+    div 	$t9, $t9, 10            	# t1 = t1/10
+$s1 will contain 0 and will save the decimal value and add to the next position.
+    add	$s1, $s1, $s0	# s1 = s1 + s0  
+if the t9 user input isnt processed or null will go back to the loop to the next digit. 
+    bnez $t9, waitloop         	# brach on no equal to zero 
