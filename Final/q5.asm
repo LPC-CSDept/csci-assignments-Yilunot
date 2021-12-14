@@ -21,7 +21,7 @@ waitloop:
     lw   $t1, 0($t0)            #load word from the input control register
     andi $t1, $t1, 0x0001       #reset or clear all the bits except LSb
     beq  $t1, $zero, waitloop   #if the bit is not ready yet go back to the waitloop
-    lw   $v0, 4($t0)            #input device is ready so read a character from I/O
+    lw   $s0, 4($t0)            #input device is ready so read a character from I/O
 
     sub	$s0, $s0, 48		    # s0 = v0-48
     mul $s0, $s0, $t9           # s0 = s0 * v0
