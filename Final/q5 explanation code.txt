@@ -30,3 +30,18 @@ we use the method called polling checking the input device is ready. Receiver Co
 the memory layout where the register is going to be located, Receiver control 0xffff0000 and Receiver data 0xffff0004
 
     lui $t0, 0xffff      #load upper immediate     
+
+    we use a loop to wait for the input from the user. basically when there is a byte of data to ready.
+    if the input control is not ready we have to be able to test it again 
+waitloop:
+   
+   lw   $t1, 0($t0)            #load word from the input control register
+
+until a character is typed at the keyboard, this will change the bit to 1 which meant that is ready.
+form 0 to1 when a character is typed at the keyboard, from 1to 0 when the character is read from the receiver data registry
+
+    andi $t1, $t1, 0x0001       #reset or clear all the bits except LSb
+loop back to test for key input if it is 0 
+    beq  $t1, $zero, waitloop   #if the bit is not ready yet go back to the waitloop
+the character will be save in s0 
+    lw   $s0, 4($t0)            #input device is ready so read a character from I/O
