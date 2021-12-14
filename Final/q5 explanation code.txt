@@ -17,3 +17,16 @@ Section that contains instructions and program logic
     .text
 Declares an instruction label as global, making it accessible to other files
     .globl main
+
+MIPS programs execute instructions sequentially, where the code under this label will be executed.
+main:
+
+we going to use $t = temporary register. can be used from $t0-$t10, to copy the word value from memory we getting 3 input from the user
+
+    lw  $t9, digits    #load word to $t9, number of digist(3)
+
+we use the method called polling checking the input device is ready. Receiver Control and Receiver Data
+
+the memory layout where the register is going to be located, Receiver control 0xffff0000 and Receiver data 0xffff0004
+
+    lui $t0, 0xffff      #load upper immediate     
