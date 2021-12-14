@@ -24,14 +24,12 @@ waitloop:
     lw   $v0, 4($t0)            #input device is ready so read a character from I/O
 
     sub	$s0, $s0, 48		    # s0 = v0-48
-    mul $s0, $s0, $t1           # s0 = s0 * v0
+    mul $s0, $s0, $t9           # s0 = s0 * v0
     div $t9, $t9, 10            # t1 = t1/10
     add	$s1, $s1, $s0		    # s1 = s1 + s0 
-    bnez $t9, waitloop       #if is the zero go to print
+    bnez $t9, waitloop          # brach on no equal to zero 
 
-done:
-	
-    move	$a0, $s1	        #copy from register to register for print
+    move	$a0, $s1	        # copy from register to register for print
     li      $v0, 1              # system call code for print integers.
     syscall 
 
