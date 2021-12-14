@@ -14,8 +14,8 @@ digits:.word   100     # (one, ten, hundred) taking the 3 digits
     .globl main
 
 main:
-    lw  $t1, digists    #load word to $t1, number of digist(3)
-    lui $t0, 0ffff      #load upper immediate 
+    lw  $t1, digits    #load word to $t1, number of digist(3)
+    lui $t0, 0xffff      #load upper immediate 
 
 waitloop:
     lw   $t2, 0($t0)            #load word from the input control register
