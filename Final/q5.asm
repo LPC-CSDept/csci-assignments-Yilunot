@@ -22,3 +22,6 @@ waitloop:
     andi $t2, $t2, 0x0001       #reset or clear all the bits except LSb
     beq  $t2, $zero, waitloop   #if the bit is not ready yet go back to the waitloop
     lw   $v0, 4($t0)            #input device is ready so read a character from I/O
+
+    sub	$s0, $s0, 48		    # s0 = v0-48
+    
