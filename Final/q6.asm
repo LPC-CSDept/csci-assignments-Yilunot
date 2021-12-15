@@ -54,7 +54,7 @@ waitloop:
 	syscall     			        	
 						               
 	li $v0,4     			        #   print the new line     
-	la $a0, new_line
+	la $a0, new
 	syscall   
     j waitloop
 
