@@ -50,4 +50,10 @@ waitloop:
 	lw     	$a0, 4($v0)   	        #  get the input key
     li 	    $s0, 113		        # load the q key into s0
     beq 	$a0, $s0, quit 	        # exit if 'q' is typed in not print 
-
+    li 	$v0,1     		            # print it here.      
+	syscall     			        	
+						               
+	li $v0,4     			        #   print the new line     
+	la $a0, new_line
+	syscall   
+    j waitloop
