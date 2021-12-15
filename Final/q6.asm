@@ -57,3 +57,16 @@ waitloop:
 	la $a0, new_line
 	syscall   
     j waitloop
+
+kdone:     
+	lw     	$v0, s1     		    # Restore other registers     
+	lw     	$a0, s2     
+#Clear the kernel Cause register $13
+	mtc0 	$0, $13     	        # Clear Cause register 
+#Set the interrupt bit in Status register $12 to 1    
+	mfc0 	$k0, $12     	        # Set Status register     
+	#andi   $k0, 0xfffd  	        # clear EXL bit d = 1101   
+	ori    	$k0, 0x11     	        # Interrupts enabled     
+	mtc0 	$k0, $12     	        # write back to status
+#Return to the user program with EPC  
+	eret    			            # return to EPC    
