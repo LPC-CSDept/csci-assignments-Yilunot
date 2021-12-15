@@ -14,7 +14,7 @@ digits:.word   100     # (one, ten, hundred) taking the 3 digits
     .globl main
 
 main:
-    lw  $t9, digits    #load word to $t9, number of digist(3)
+    lw  $t2, digits    #load word to $t9, number of digist(3)
     lui $t0, 0xffff      #load upper immediate 
 
 waitloop:
@@ -24,10 +24,10 @@ waitloop:
     lw   $s0, 4($t0)            #input device is ready so read a character from I/O
 
     sub	$s0, $s0, 48		    # s0 = v0-48
-    mul $s0, $s0, $t9           # s0 = s0 * v0
-    div $t9, $t9, 10            # t1 = t1/10
+    mul $s0, $s0, $t2           # s0 = s0 * v0
+    div $t2, $t2, 10            # t1 = t1/10
     add	$s1, $s1, $s0		    # s1 = s1 + s0 
-    bnez $t9, waitloop          # brach on no equal to zero 
+    bnez $t2, waitloop          # brach on no equal to zero 
 
     move	$a0, $s1	        # copy from register to register for print
     li      $v0, 1              # system call code for print integers.
