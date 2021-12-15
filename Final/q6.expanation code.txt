@@ -56,3 +56,23 @@ The address of the instruction that is about to be executed is saved into aspeci
 	srl     $a0, $k0, 2     	    #   Extract   ExcCode     Field     
 	andi    $a0, $a0, 0x1f 	        #   Get the exception code
 	bne     $a0, $zero, kdone       # Exception Code 0 is I/O. Only processing I/O
+
+#we use the loop here to wait for the user input and also test the input of the user.
+
+    waitloop:
+#get the data from the memory mapped I/O Receiver data register
+    lui     $v0, 0xffff    	        #   $v0 =   0xFFFF0000     
+	lw     	$a0, 4($v0)   	        #  get the input key
+ascii value of q = 113 will be save in s0  
+    li 	    $s0, 113		        # load the q key into s0
+will test the s0 to the user input if is the samme will branch to quit
+    beq 	$a0, $s0, quit 	        # exit if 'q' is typed in not print 
+#print the character
+    li 	$v0,1     		            # print it here.      
+	syscall     			        	
+#print the next character tab 						               
+	li $v0,4     			        #   print the new line     
+	la $a0, new
+	syscall
+#will go back to the loop to test for the q.  
+    j waitloop
