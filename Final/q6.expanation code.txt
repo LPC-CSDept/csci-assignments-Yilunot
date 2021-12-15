@@ -45,3 +45,14 @@ The address of the instruction that is about to be executed is saved into aspeci
 #save registers
     sw     	$v0, s1     		    #  We need to use these registers  
 	sw     	$a0, s2     	        #  not using the stack because the interrupt
+
+#$k0 and $k1 are both used as temporary variables in interrupt servicing routines.
+#Coprocessor 0 Register $13; Cause register
+#detect the exception called 
+#When an interrupts occurs, the Cause Register indicates 
+#For an exception,  the exception fields hold the exception type
+#For an interrupt,  the exception fields hold the 0000; the bits will be set for pending interrupts.
+    mfc0 	$k0, $13     	        #   Cause register     
+	srl     $a0, $k0, 2     	    #   Extract   ExcCode     Field     
+	andi    $a0, $a0, 0x1f 	        #   Get the exception code
+	bne     $a0, $zero, kdone       # Exception Code 0 is I/O. Only processing I/O
