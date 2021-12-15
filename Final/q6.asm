@@ -30,4 +30,15 @@ main:
 		ori     $a0, $0, 2     	    #enable keyboard interrupt     
 		sw     	$a0, 0($t0)     	#write back to 0xFFFF0000;Receiver Control
 
-loop:   j 	lopp    			    #   stay here forever keep program running   
+loop:   j 	lopp    			    #   stay here forever keep program running
+
+
+	# KERNEL text
+		
+	.ktext  0x80000180     	        # kernel code starts here section
+#save registers
+    sw     	$v0, s1     		    #  We need to use these registers  
+	sw     	$a0, s2     	        #  not using the stack because the interrupt
+
+
+
