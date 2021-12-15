@@ -45,5 +45,9 @@ loop:   j 	lopp    			    #   stay here forever keep program running
 	andi    $a0, $a0, 0x1f 	        #   Get the exception code     
 	bne     $a0, $zero, kdone       # Exception Code 0 is I/O. Only processing I/O
 
-
+waitloop:
+    lui     $v0, 0xffff    	        #   $v0 =   0xFFFF0000     
+	lw     	$a0, 4($v0)   	        #  get the input key
+    li 	    $s0, 113		        # load the q key into s0
+    beq 	$a0, $s0, quit 	        # exit if 'q' is typed in not print 
 
