@@ -76,3 +76,8 @@ will test the s0 to the user input if is the samme will branch to quit
 	syscall
 #will go back to the loop to test for the q.  
     j waitloop
+    
+#only will be access if the user press q for the program to end
+quit:								#quit,end the program when the q key pressed 
+	li $v0	10		
+	syscall
