@@ -58,6 +58,10 @@ waitloop:
 	syscall   
     j waitloop
 
+quit:								#quit,end the program when the q key pressed 
+	li $v0	10		
+	syscall
+
 kdone:     
 	lw     	$v0, s1     		    # Restore other registers     
 	lw     	$a0, s2     
