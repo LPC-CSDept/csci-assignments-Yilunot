@@ -1,5 +1,5 @@
 #
-#q6.asm
+#q6 explanation.asm
 #
 #Tony Liu
 #12/15/21
