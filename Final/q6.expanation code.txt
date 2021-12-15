@@ -30,3 +30,18 @@ main:
 		lui     $t0, 0xFFFF     	#$t0 = 0xFFFF0000     
 		ori     $a0, $0, 2     	    #enable keyboard interrupt     
 		sw     	$a0, 0($t0)     	#write back to 0xFFFF0000;Receiver Control
+
+
+#the program has the interrupt so it will go to the kernel exception handler
+    loop:   j 	loop    			    #   stay here forever keep program running
+
+# KERNEL text
+#PC is set to be 0x80000180, the starting address of the interrupthandler 
+#which takes the processor to theinterrupt handler
+
+The address of the instruction that is about to be executed is saved into aspecial register called EPC
+
+	.ktext  0x80000180     	        # kernel code starts here section
+#save registers
+    sw     	$v0, s1     		    #  We need to use these registers  
+	sw     	$a0, s2     	        #  not using the stack because the interrupt
