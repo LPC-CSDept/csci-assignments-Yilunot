@@ -76,8 +76,24 @@ will test the s0 to the user input if is the samme will branch to quit
 	syscall
 #will go back to the loop to test for the q.  
     j waitloop
-    
+
 #only will be access if the user press q for the program to end
 quit:								#quit,end the program when the q key pressed 
 	li $v0	10		
 	syscall
+
+kdone:     
+	lw     	$v0, s1     		    # Restore other registers     
+	lw     	$a0, s2     
+#Clear the kernel Cause register $13 restore the cause register  
+	mtc0 	$0, $13     	        # Clear Cause register 
+#Set the interrupt bit in Status register $12 to 1, reset the status register   
+	mfc0 	$k0, $12     	        # Set Status register   
+  
+	#andi   $k0, 0xfffd  	        # clear EXL bit d = 1101   
+	ori    	$k0, 0x11     	        # Interrupts enabled     
+	mtc0 	$k0, $12     	        # write back to status
+#Return to the user program with EPC  
+The last instruction of the interrupt is eret which sets the value of the PC to the value stored in EPC and go back to the loop.
+
+	eret    			            # return to EPC  (Exception Program Counter)  
