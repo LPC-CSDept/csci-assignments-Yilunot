@@ -39,6 +39,11 @@ loop:   j 	lopp    			    #   stay here forever keep program running
 #save registers
     sw     	$v0, s1     		    #  We need to use these registers  
 	sw     	$a0, s2     	        #  not using the stack because the interrupt
+#Coprocessor 0 Register $13; Cause Registe
+    mfc0 	$k0, $13     	        #   Cause register     
+	srl     $a0, $k0, 2     	    #   Extract   ExcCode     Field     
+	andi    $a0, $a0, 0x1f 	        #   Get the exception code     
+	bne     $a0, $zero, kdone       # Exception Code 0 is I/O. Only processing I/O
 
 
 
