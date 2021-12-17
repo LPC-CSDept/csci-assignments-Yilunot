@@ -14,6 +14,7 @@ s1:     .word 10         # storage for register $v0
 s2:     .word 11         # storage for register $a0
 #new line 
 new:    .asciiz     "\n"
+q_msg:	.asciiz  " 'q' key was pressed  \n End Program"
 
 #Section that contains instructions and program logic
         .text     
@@ -57,9 +58,8 @@ The address of the instruction that is about to be executed is saved into aspeci
 	andi    $a0, $a0, 0x1f 	        #   Get the exception code
 	bne     $a0, $zero, kdone       # Exception Code 0 is I/O. Only processing I/O
 
-#we use the loop here to wait for the user input and also test the input of the user.
+#wait for the user input and also test the input of the user.
 
-    waitloop:
 #get the data from the memory mapped I/O Receiver data register
     lui     $v0, 0xffff    	        #   $v0 =   0xFFFF0000     
 	lw     	$a0, 4($v0)   	        #  get the input key
@@ -73,13 +73,6 @@ will test the s0 to the user input if is the samme will branch to quit
 #print the next character tab 						               
 	li $v0,4     			        #   print the new line     
 	la $a0, new
-	syscall
-#will go back to the loop to test for the q.  
-    j waitloop
-
-#only will be access if the user press q for the program to end
-quit:								#quit,end the program when the q key pressed 
-	li $v0	10		
 	syscall
 
 kdone:     
@@ -97,3 +90,11 @@ kdone:
 The last instruction of the interrupt is eret which sets the value of the PC to the value stored in EPC and go back to the loop.
 
 	eret    			            # return to EPC  (Exception Program Counter)  
+
+#once jump here the program will print a message that the key was press and therefore the program will end
+quit:
+	li 	$v0, 4
+	la 	$a0, q_msg      #print quit message text 
+	syscall				#quit,end the program when the qkey pressed 								#quit,end the program when the q key pressed 
+	li $v0	10		
+	syscall
