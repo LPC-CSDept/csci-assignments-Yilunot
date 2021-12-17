@@ -47,7 +47,7 @@ the character will be save in s0
     lw   $s0, 4($t0)            #input device is ready so read a character from I/O
 
 the calculation to convert the ascii value into decimal value
-what ever digit the user enters, example if user press they key 4 is = 52-48 (0 in ascii key) = 4 
+what ever digit the user enters, example if user press they key 4 is(52 in ascii key) = 52-48 (0 in ascii value) = 4 
 converts s0 ascii value to dec value
     sub	$s0, $s0, 48	# s0 = v0-48
 This has one mul less per iteration, and there's no need of knowing the length of the digit before entering the loop.

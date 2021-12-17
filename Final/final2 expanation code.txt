@@ -90,7 +90,9 @@ kdone:
 The last instruction of the interrupt is eret which sets the value of the PC to the value stored in EPC and go back to the loop.
 
 	eret    			            # return to EPC  (Exception Program Counter)  
-
+#There are certain instructions that need to be executed by Kernel only. So, the CPU executes these instructions in the Kernel Mode only. 
+#For example, memory management should be done in Kernel-program only. 
+#While in the User program, the CPU executes the processes that are given by the user in the User Space.
 #once jump here the program will print a message that the key was press and therefore the program will end
 quit:
 	li 	$v0, 4
