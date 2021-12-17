@@ -48,6 +48,11 @@ waitloop:
     la $a0, newline             #format next line tab print
     syscall   
 
+    
+ 	li $v0,4     			    #   print the message result.  
+    la $a0, result
+    syscall  
+
     move	$a0, $s1	        # copy from register to register for print
     li      $v0, 1              # system call code for print integers.
     syscall 

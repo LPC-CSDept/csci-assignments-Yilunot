@@ -11,7 +11,10 @@ we use "digits:" what can be cosidered as a label or symbolic names for my data.
 
 .data
 digits:	.word   100     # (one, ten, hundred) taking the 3 digits
-
+#asking user to input digits
+askdigit: .asciiz  "Enter 3 digit: "    #ask user to enter digits
+newline: .asciiz "\n"           #tab
+result: .asciiz "Result: "      #result 
 Section that contains instructions and program logic
 
     .text
@@ -31,6 +34,12 @@ the memory layout where the register is going to be located, Receiver control 0x
 
     lui $t0, 0xffff      #load upper immediate     
 
+#just print the intruction message for user.
+ li $v0,4     			        #   print the askdigit     
+    la $a0, askdigit
+    syscall 
+
+
     we use a loop to wait for the input from the user. basically when there is a byte of data to ready.
     if the input control is not ready we have to be able to test it again 
 waitloop:
@@ -45,6 +54,15 @@ loop back to test for key input if it is 0
     beq  $t1, $zero, waitloop   #if the bit is not ready yet go back to the waitloop
 the character will be save in s0 
     lw   $s0, 4($t0)            #input device is ready so read a character from I/O
+#display the decimal value of the input key 
+#print everysingle digit from the user
+    move $t2, $s0               #move temporal to t2
+    add $t2,$t2 ,-48              #take the input asciiz value of the digit and subtract to 48 that is 0 in decimal the result will be the decimal value.
+    move $a0,$t2                #move to the t2 to $a0 to be print
+    li $v0, 1                      #system call to print 
+    syscall   
+
+
 
 the calculation to convert the ascii value into decimal value
 what ever digit the user enters, example if user press they key 4 is(52 in ascii key) = 52-48 (0 in ascii value) = 4 
@@ -59,6 +77,16 @@ $s1 will contain 0 and will save the decimal value and add to the next position.
 if the 2 user input isnt processed or null will go back to the loop to the next digit. 
     bnez $2, waitloop         	# brach on no equal to zero 
 
+
+#tab the line for the display
+    li $v0,4     			    #   print the new line     
+    la $a0, newline             #format next line tab print
+    syscall   
+#print format to display
+
+    li $v0,4     			    # print the message result.  
+    la $a0, result              # syscall to display message
+    syscall  
 
 move value saved in $s1 to be printed to $a0 
 
