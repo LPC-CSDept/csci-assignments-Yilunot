@@ -30,9 +30,9 @@ waitloop:
     lw   $s0, 4($t0)            #input device is ready so read a character from I/O
 #temporal holding 
 #print everysingle digit from the user
-    move $t2, $s0               #move temporal to t2
-    add $t2,$t2 ,-48              #take the input asciiz value of the digit and subtract to 48 that is 0 in decimal
-    move $a0,$t2                #move to the t2 to $a0 to be print
+    move $t3, $s0               #move temporal to t3
+    add $t3,$t3 ,-48              #take the input asciiz value of the digit and subtract to 48 that is 0 in decimal
+    move $a0,$t3                #move to the t3 to $a0 to be print
     li $v0, 1                      #system call to print 
     syscall   
 
