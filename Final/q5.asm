@@ -24,7 +24,7 @@ waitloop:
     lw   $s0, 4($t0)            #input device is ready so read a character from I/O
 
     sub	$s0, $s0, 48		    # s0 = s0(user input)-48
-    mul $s0, $s0, $t2           # s0 = s0 * v0
+    mul $s0, $s0, $t2           # s0 = s0 * digits
     div $t2, $t2, 10            # t1 = t1/10
     add	$s1, $s1, $s0		    # s1 = s1 + s0 
     bnez $t2, waitloop          # brach on no equal to zero 
