@@ -12,8 +12,8 @@
 #value holding
 s1:     .word 10         # storage for register $v0     
 s2:     .word 11         # storage for register $a0
-
 new:    .asciiz     "\n"
+q_msg:	.asciiz  " 'q' key was pressed  \n End Program"
 
 #Section that contains instructions and program logic
         .text     
@@ -45,7 +45,6 @@ loop:   j 	loop    			    #   stay here forever keep program running
 	andi    $a0, $a0, 0x1f 	        #   Get the exception code     
 	bne     $a0, $zero, kdone       # Exception Code 0 is I/O. Only processing I/O
 
-waitloop:
     lui     $v0, 0xffff    	        #   $v0 =   0xFFFF0000     
 	lw     	$a0, 4($v0)   	        #  get the input key
     li 	    $s0, 113		        # load the q key into s0
@@ -56,11 +55,6 @@ waitloop:
 	li $v0,4     			        #   print the new line     
 	la $a0, new
 	syscall   
-    j waitloop
-
-quit:								#quit,end the program when the q key pressed 
-	li $v0	10		
-	syscall
 
 kdone:     
 	lw     	$v0, s1     		    # Restore other registers     
@@ -74,3 +68,11 @@ kdone:
 	mtc0 	$k0, $12     	        # write back to status
 #Return to the user program with EPC  
 	eret    			            # return to EPC    
+
+quit:
+	li 	$v0, 4
+	la 	$a0, q_msg      #print quit message text 
+	syscall				#quit,end the program when the qkey pressed 								#quit,end the program when the q key pressed 
+	li $v0	10		
+	syscall
+
