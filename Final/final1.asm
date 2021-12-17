@@ -16,7 +16,7 @@ result: .asciiz "Result: "      #result
     .globl main
 
 main:
-    lw  $t2, digits    #load word to $t9, number of digist(3)
+    lw  $t2, digits    #load word to $t2, number of digist(3)
     lui $t0, 0xffff      #load upper immediate 
 
     li $v0,4     			        #   print the askdigit     
@@ -35,8 +35,6 @@ waitloop:
     move $a0,$t2                #move to the t2 to $a0 to be print
     li $v0, 1                      #system call to print 
     syscall   
-
-
 
     sub	$s0, $s0, 48		    # s0 = s0(user input)-48
     mul $s0, $s0, $t2           # s0 = s0 * digits
