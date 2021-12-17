@@ -26,7 +26,7 @@ main:
 
 we going to use $t = temporary register. can be used from $t0-$t10, to copy the word value from memory we getting 3 input from the user
 
-    lw  $2, digits    #load word to $2, number of digist(3)
+    lw  $t2, digits    #load word to $t2, number of digist(3)
 
 we use the method called polling checking the input device is ready. Receiver Control and Receiver Data
 
@@ -56,9 +56,9 @@ the character will be save in s0
     lw   $s0, 4($t0)            #input device is ready so read a character from I/O
 #display the decimal value of the input key 
 #print everysingle digit from the user
-    move $t2, $s0               #move temporal to t2
-    add $t2,$t2 ,-48              #take the input asciiz value of the digit and subtract to 48 that is 0 in decimal the result will be the decimal value.
-    move $a0,$t2                #move to the t2 to $a0 to be print
+    move $t3, $s0               #move temporal to t3
+    add $t3,$t3 ,-48              #take the input asciiz value of the digit and subtract to 48 that is 0 in decimal the result will be the decimal value.
+    move $a0,$t3                #move to the t3 to $a0 to be print
     li $v0, 1                      #system call to print 
     syscall   
 
@@ -69,13 +69,13 @@ what ever digit the user enters, example if user press they key 4 is(52 in ascii
 converts s0 ascii value to dec value
     sub	$s0, $s0, 48	# s0 = v0-48
 This has one mul less per iteration, and there's no need of knowing the length of the digit before entering the loop.
-    mul 	$s0, $s0, $2          # s0 = s0 * v0
+    mul 	$s0, $s0, $t2          # s0 = s0 * v0
 dividing by ten to go to the next iteration of the user input
-    div 	$2, $2, 10            	# t1 = t1/10
+    div 	$t2, $t2, 10            	# t1 = t1/10
 $s1 will contain 0 and will save the decimal value and add to the next position.
     add	$s1, $s1, $s0	# s1 = s1 + s0  
-if the 2 user input isnt processed or null will go back to the loop to the next digit. 
-    bnez $2, waitloop         	# brach on no equal to zero 
+if the t2 user input isnt processed or null will go back to the loop to the next digit. 
+    bnez $t2, waitloop         	# brach on no equal to zero 
 
 
 #tab the line for the display
